@@ -116,6 +116,7 @@ class HomeUI extends HookConsumerWidget {
                         ],
                       ),
                     Container(
+                      width: MediaQuery.of(context).size.width,
                       padding: const EdgeInsets.only(
                           left: 12, right: 12, top: 12, bottom: 12),
                       margin: const EdgeInsets.only(
@@ -127,53 +128,58 @@ class HomeUI extends HookConsumerWidget {
                       ),
                       child: Row(
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                nt.value,
-                                style: const TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
-                              const SizedBox(height: 6),
-                              Row(
-                                children: [
-                                  Text(
-                                    S.current.downloader_info_total_size(
-                                        FileSize.getSize(
-                                            task.totalLength ?? 0)),
-                                    style: const TextStyle(fontSize: 14),
-                                  ),
-                                  const SizedBox(width: 12),
-                                  if (nt.key == "torrent" &&
-                                      task.verifiedLength != null &&
-                                      task.verifiedLength != 0)
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  nt.value,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(height: 12),
+                                Row(
+                                  children: [
                                     Text(
-                                      S.current.downloader_info_verifying(
+                                      S.current.downloader_info_total_size(
                                           FileSize.getSize(
-                                              task.verifiedLength)),
+                                              task.totalLength ?? 0)),
                                       style: const TextStyle(fontSize: 14),
-                                    )
-                                  else if (task.status == "active")
-                                    Text(S.current.downloader_info_downloading(
-                                        ((task.completedLength ?? 0) *
-                                                100 /
-                                                (task.totalLength ?? 1))
-                                            .toStringAsFixed(4)))
-                                  else
-                                    Text(S.current.downloader_info_status(
-                                        model.statusMap[task.status] ??
-                                            "Unknown")),
-                                  const SizedBox(width: 24),
-                                  if (task.status == "active" &&
-                                      task.verifiedLength == null)
-                                    Text(
-                                        "ETA:  ${model.formatter.format(DateTime.now().add(Duration(seconds: model.getETA(task))))}"),
-                                ],
-                              ),
-                            ],
+                                    ),
+                                    const SizedBox(width: 12),
+                                    if (nt.key == "torrent" &&
+                                        task.verifiedLength != null &&
+                                        task.verifiedLength != 0)
+                                      Text(
+                                        S.current.downloader_info_verifying(
+                                            FileSize.getSize(
+                                                task.verifiedLength)),
+                                        style: const TextStyle(fontSize: 14),
+                                      )
+                                    else if (task.status == "active")
+                                      Text(S.current
+                                          .downloader_info_downloading(
+                                              ((task.completedLength ?? 0) *
+                                                      100 /
+                                                      (task.totalLength ?? 1))
+                                                  .toStringAsFixed(4)))
+                                    else
+                                      Text(S.current.downloader_info_status(
+                                          model.statusMap[task.status] ??
+                                              "Unknown")),
+                                    const SizedBox(width: 24),
+                                    if (task.status == "active" &&
+                                        task.verifiedLength == null)
+                                      Text(
+                                          "ETA:  ${model.formatter.format(DateTime.now().add(Duration(seconds: model.getETA(task))))}"),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                          const Spacer(),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -243,7 +249,7 @@ class HomeUI extends HookConsumerWidget {
               itemCount: model.getTasksLen(),
             )),
           Padding(
-            padding: const EdgeInsets.only(left: 12, bottom: 3, top: 3),
+            padding: const EdgeInsets.only(left: 12, bottom: 8, top: 3),
             child: Row(
               children: [
                 Container(
@@ -255,9 +261,12 @@ class HomeUI extends HookConsumerWidget {
                   ),
                 ),
                 const SizedBox(width: 12),
-                Text(S.current.downloader_info_download_upload_speed(
-                    FileSize.getSize(state.globalStat?.downloadSpeed ?? 0),
-                    FileSize.getSize(state.globalStat?.uploadSpeed ?? 0)))
+                Text(
+                  S.current.downloader_info_download_upload_speed(
+                      FileSize.getSize(state.globalStat?.downloadSpeed ?? 0),
+                      FileSize.getSize(state.globalStat?.uploadSpeed ?? 0)),
+                  style: const TextStyle(fontSize: 12),
+                )
               ],
             ),
           ),
