@@ -124,9 +124,9 @@ class NewDownloadTaskDialogUI extends HookConsumerWidget {
           if (!context.mounted) return;
           showToast(context, "出现错误：$e");
         }
-        if (!context.mounted) return;
-        Navigator.pop(context);
       }
+      if (!context.mounted) return;
+      Navigator.pop(context);
     }
 
     useEffect(() {
@@ -198,41 +198,38 @@ class NewDownloadTaskDialogUI extends HookConsumerWidget {
                           onPressed: goSelectFiles,
                           child: torrentFiles.value.isEmpty
                               ? Center(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const LocalHero(
-                                  tag: "ic_open_file",
-                                  child: Icon(FluentIcons.open_file,
-                                      size: 32),
-                                ),
-                                const SizedBox(height: 12),
-                                Text(isInFileDrop.value
-                                    ? "释放文件以添加"
-                                    : "拖放文件或点击此处选择文件"),
-                              ],
-                            ),
-                          )
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const LocalHero(
+                                        tag: "ic_open_file",
+                                        child: Icon(FluentIcons.open_file,
+                                            size: 32),
+                                      ),
+                                      const SizedBox(height: 12),
+                                      Text(isInFileDrop.value
+                                          ? "释放文件以添加"
+                                          : "拖放文件或点击此处选择文件"),
+                                    ],
+                                  ),
+                                )
                               : Padding(
-                            padding: const EdgeInsets.only(
-                                left: 12,
-                                right: 12,
-                                top: 16,
-                                bottom: 16),
-                            child: Row(
-                              children: [
-                                const LocalHero(
-                                  tag: "ic_open_file",
-                                  child: Icon(FluentIcons.open_file,
-                                      size: 32),
+                                  padding: const EdgeInsets.only(
+                                      left: 12, right: 12, top: 16, bottom: 16),
+                                  child: Row(
+                                    children: [
+                                      const LocalHero(
+                                        tag: "ic_open_file",
+                                        child: Icon(FluentIcons.open_file,
+                                            size: 32),
+                                      ),
+                                      const SizedBox(width: 12),
+                                      Text(isInFileDrop.value
+                                          ? "释放文件以添加"
+                                          : "拖放文件或点击此处选择文件"),
+                                    ],
+                                  ),
                                 ),
-                                const SizedBox(width: 12),
-                                Text(isInFileDrop.value
-                                    ? "释放文件以添加"
-                                    : "拖放文件或点击此处选择文件"),
-                              ],
-                            ),
-                          ),
                         ),
                       ),
                     ),

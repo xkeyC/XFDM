@@ -71,7 +71,7 @@ class HomeUIModel extends _$HomeUIModel {
     final aria2cState = ref.read(aria2cModelProvider);
     switch (key) {
       case "new_task":
-        await _showNewDownloadTaskDialog(context);
+        await _showNewDownloadTaskDialog(context,aria2cState);
         await _updateState();
         return;
       case "pause_all":
@@ -325,10 +325,11 @@ class HomeUIModel extends _$HomeUIModel {
     }
   }
 
-  Future<void> _showNewDownloadTaskDialog(BuildContext context) async {
+  Future<void> _showNewDownloadTaskDialog(BuildContext context, Aria2cModelState aria2cState) async {
     await showDialog(
         context: context,
         builder: (BuildContext context) => const NewDownloadTaskDialogUI());
+    aria2cState.aria2c?.saveSession();
     await _updateState();
   }
 }
