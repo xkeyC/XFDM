@@ -27,7 +27,7 @@ dependencies:
   flutter_acrylic: ^1.1.0
   rust_lib_xfdm:
     path: rust_builder
-  flutter_rust_bridge: 2.0.0-dev.28
+  flutter_rust_bridge: 2.0.0-dev.31
   device_info_plus: ^9.0.3
   synchronized: ^3.1.0+1
   aria2:

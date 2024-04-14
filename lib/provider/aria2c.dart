@@ -84,7 +84,7 @@ class Aria2cModel extends _$Aria2cModel {
     // final trackerList = await Api.getTorrentTrackerList();
     dPrint("Aria2cManager .-----  aria2c start $port------");
 
-    final stream = rs_process.startProcess(
+    final stream = await rs_process.startProcess(
         executable: exePath,
         arguments: [
           "-V",
