@@ -1,8 +1,8 @@
-name: "Windows Nightly Build"
+name: "Windows Weekly Build"
 on:
-  schedule:
-    - cron: "12 00 * * *" # every day at midnight
-  workflow_dispatch:
+    schedule:
+        - cron: "0 0 * * 1" # every Monday at midnight
+    workflow_dispatch:    
 jobs:
   build:
     runs-on: windows-latest
